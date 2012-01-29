@@ -1,0 +1,44 @@
+
+<style type="text/css">
+    .sidebar, footer {
+        display: none;
+    }
+
+    .container-fluid > .content {
+        margin-left: 0px;
+    }
+
+    iframe {
+        position: absolute;
+        top: 100px;
+        left: 0
+    }
+
+    .horizontal li {
+        margin: 5px;
+        float: left;
+        list-style: none;
+    }
+    
+    .horizontal li a:hover {
+        text-decoration: none;
+    }
+</style>
+
+<h1>
+    {{link.title}}
+    <small>
+        <a target="_blank" href="{{link.url}}">Ir al sitio</a>
+    </small>
+</h1>
+<ul class="horizontal">
+    {{#link.tags}}
+    <li>
+        <a href="{{base}}tag/{{.}}">
+            <span class="label">{{.}}</span>
+        </a>
+    </li>
+    {{/link.tags}}
+</ul>
+
+<iframe src="{{link.url}}" style="border: none; height: 900px; width: 100%; overflow: hidden;"></iframe>

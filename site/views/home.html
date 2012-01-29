@@ -1,0 +1,33 @@
+<style type="text/css">
+    .row li {
+        margin: 5px;
+        float: left;
+        list-style: none;
+    }
+
+    .row li a:hover {
+        text-decoration: none;
+    }
+</style>
+
+<div class="hero-unit">
+    <h1>Links</h1>
+
+    <p>Colecci&oacute;n de art&iacute;culos, blogs, y otras cosas interesantes</p>
+
+</div>
+
+<!-- Example row of columns -->
+<div class="row">
+    <ul>
+        {{#tags}}
+        <li>
+            <a href="{{base}}tag/{{title}}">
+                <span class="label">{{title}} ({{quantity}})</span>
+            </a>
+        </li>
+        {{/tags}}
+    </ul>
+</div>
+
+<hr>

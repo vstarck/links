@@ -1,0 +1,48 @@
+<style type="text/css">
+    .row li {
+        margin: 5px;
+        float: left;
+        list-style: none;
+    }
+
+    .row li a:hover {
+        text-decoration: none;
+    }
+    
+    table.condensed-table {
+        margin: 20px
+    }
+</style>
+
+<div class="row">
+    <table class="condensed-table">
+        <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>Tags</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#links}}
+        <tr>
+            <td>
+                <a href="{{base}}{{id}}/{{title}}">
+                {{title}}
+                </a>
+            </td>
+            <td>
+                {{#tags}}
+                <li>
+                    <a href="{{base}}tag/{{title}}">
+                        <span class="label">{{title}}</span>
+                    </a>
+                </li>
+                {{/tags}}
+            </td>
+        </tr>
+        {{/links}}
+        </tbody>
+    </table>
+</div>
+
+<hr>
