@@ -9,7 +9,7 @@ require_once 'src/Link.php';
 
 AsadooResponse::mix(new AsadooResponseMustacheAdapter());
 
-R::setup('mysql:host=localhost;dbname=link','link','1234');
+R::setup('mysql:host=localhost;dbname=%DB%','%USER%','%PASS%');
 
 asadoo()->dependences()->register('link', function() {
     return new Link();
