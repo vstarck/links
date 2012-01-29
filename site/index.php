@@ -1,6 +1,6 @@
 <?php
 
-
+// Requires
 require_once 'vendor/asadoo-0.2.php';
 require_once 'vendor/Mustache.php';
 require_once 'vendor/rb.php';
@@ -11,6 +11,7 @@ AsadooResponse::mix(new AsadooResponseMustacheAdapter());
 
 R::setup('mysql:host=localhost;dbname=%DB%','%USER%','%PASS%');
 
+// RedBean dependence
 asadoo()->dependences()->register('link', function() {
     return new Link();
 });
@@ -25,6 +26,7 @@ asadoo()
             $response->end();
         });
 
+// Sidebar tags (always visible)
 asadoo()
         ->handle(function($request, $response, $dependences) {
             $response->assign('recent', $dependences->link->recent(10));
@@ -61,14 +63,16 @@ asadoo()
                     'link' => $link
                 ));
                 $response->end();
-            }
+            } // else, 404
         });
 
+// Link list (filtered by tags)
 asadoo()
         ->get('/tag/*', function($request, $response, $dependences) {
             $tags = array();
             $index = 1;
 
+            // Fetch all tags
             while($request->segment($index)) {
                 $tags[] = $request->segment($index++);
             }
@@ -83,12 +87,15 @@ asadoo()
             $response->end();
         });
 
+
+// Add form
 asadoo()
         ->get('/add', function($request, $response, $dependences) {
             $response->render('views/add.html');
             $response->end();
         });
 
+// Add result
 asadoo()
         ->post('/add', function($request, $response, $dependences) {
             $tags = $request->post('tags', '');
