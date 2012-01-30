@@ -12,7 +12,8 @@ class Link {
         }
 
         $export = $link->export();
-        $export['tags'] = R::tag($link);
+
+        $export['tags'] = $this->encodeTags(R::tag($link));
 
         return $export;
     }
@@ -42,6 +43,7 @@ class Link {
 
         foreach ($result as &$link) {
             $link['safe'] = preg_replace('/[^a-z\d]/', '-', strtolower($link['title']));
+            $link['safe'] = preg_replace('/-+/', '-', $link['title']);
         }
 
         return $result;
@@ -67,6 +69,7 @@ class Link {
 
         foreach ($result as &$tag) {
             $tag['quantity'] = count($tag['sharedLink']);
+            $tag['safe'] = urlencode($tag['title']);
             unset($tag['sharedLink']);
             $titles[] = $tag['title'];
         }
@@ -74,5 +77,13 @@ class Link {
         array_multisort($titles, $result);
 
         return $result;
+    }
+
+    private function encodeTags($tags) {
+        foreach ($tags as &$tag) {
+            $tag['safe'] = urlencode($tag['title']);
+        }
+
+        return $tags;
     }
 }

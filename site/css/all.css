@@ -1,3 +1,7 @@
 body {
   padding-top: 60px;
 }
+
+.label:hover {
+    background-color: #46A546;
+}
